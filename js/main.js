@@ -89,19 +89,19 @@ function replaceAllEmojisAndSymbolsExcludingHTML(htmlContent) {
 function processStyles(htmlContent) {
     htmlContent = htmlContent.replace(/<b[^>]*>/gi, '').replace(/<\/b>/gi, '');
     // i and b and u
-    htmlContent = htmlContent.replace(/<span[^>]*style="[^"]*font-weight:\s*700[^"]*;[^"]*font-style:\s*italic[^"]*;[^"]*text-decoration-line:\s*underline[^"]*"[^>]*>(.*?)<\/span>/gi, '<i style="text-decoration: underline;font-weight: bold;">$1</i>');
+    htmlContent = htmlContent.replace(/<span[^>]*style="[^"]*font-weight:\s*700[^"]*;[^"]*font-style:\s*italic[^"]*;[^"]*text-decoration:\s*underline[^"]*"[^>]*>(.*?)<\/span>/gi, '<i style="text-decoration: underline;font-weight: bold;">$1</i>');
 
     // i and u
-    htmlContent = htmlContent.replace(/<span[^>]*style="[^"]*font-style:\s*italic[^"]*;[^"]*text-decoration-line:\s*underline[^"]*"[^>]*>(.*?)<\/span>/gi, '<i style="text-decoration: underline;">$1</i>');
+    htmlContent = htmlContent.replace(/<span[^>]*style="[^"]*font-style:\s*italic[^"]*;[^"]*text-decoration:\s*underline[^"]*"[^>]*>(.*?)<\/span>/gi, '<i style="text-decoration: underline;">$1</i>');
 
     // i and b
     htmlContent = htmlContent.replace(/<span[^>]*style="[^"]*font-weight:\s*700[^"]*;[^"]*font-style:\s*italic[^"]*"[^>]*>(.*?)<\/span>/gi, '<b style="font-style: italic;">$1</b>');
 
     // b and u
-    htmlContent = htmlContent.replace(/<span[^>]*style="[^"]*font-weight:\s*700[^"]*;[^"]*text-decoration-line:\s*underline[^"]*"[^>]*>(.*?)<\/span>/gi, '<b style="text-decoration: underline;">$1</b>');
+    htmlContent = htmlContent.replace(/<span[^>]*style="[^"]*font-weight:\s*700[^"]*;[^"]*text-decoration:\s*underline[^"]*"[^>]*>(.*?)<\/span>/gi, '<b style="text-decoration: underline;">$1</b>');
 
     // u
-    htmlContent = htmlContent.replace(/<span[^>]*style="[^"]*text-decoration-line:\s*underline[^"]*"[^>]*>(.*?)<\/span>/gi, '<u>$1</u>');
+    htmlContent = htmlContent.replace(/<span[^>]*style="[^"]*text-decoration:\s*underline[^"]*"[^>]*>(.*?)<\/span>/gi, '<u>$1</u>');
 
     // b
     htmlContent = htmlContent.replace(/<span[^>]*style="[^"]*font-weight:\s*700[^"]*"[^>]*>(.*?)<\/span>/gi, '<b>$1</b>');
@@ -431,14 +431,6 @@ function wrapFooterCenterBlock(htmlContent) {
 
 //footer new logic end
 
-//one br start
-function addOneBr(htmlContent) {
-    return htmlContent.replace(/ю/gi, function (match, content) {
-        return `
-                    <br>
-        `;
-    });
-}
 
 function replaceTripleBrWithSingle (htmlContent) {
     const BR = `<br>\n`;
@@ -614,9 +606,34 @@ function wrapContentInFullTableStructure(htmlContent) {
     return fullTableStructure;
 }
 
+//one br logic new
+function preserveSingleBr(htmlContent) {
+    htmlContent = htmlContent.replace(
+        /<div[^>]*>\s*<br\s*\/?>\s*<\/div>/gi,
+        'ю'
+    );
+
+    htmlContent = htmlContent.replace(
+        /<span[^>]*>\s*<br\s*\/?>\s*<\/span>/gi,
+        'ю'
+    );
+
+    return htmlContent;
+}
+//one br logic end
+//one br old start
+function addOneBr(htmlContent) {
+    return htmlContent.replace(/ю/gi, function (match, content) {
+        return `
+                    <br>
+        `;
+    });
+}
+
 async function exportHTML() {
     window.currentImgIdx = 1;
     let editorContent = document.getElementById('editor').innerHTML;
+    editorContent = preserveSingleBr(editorContent);
     editorContent = italicLinks(editorContent);
     editorContent = linksStyles(editorContent);
     editorContent = replaceAllEmojisAndSymbolsExcludingHTML(editorContent);
@@ -639,6 +656,7 @@ async function exportHTML() {
     editorContent = wrapFooterCenterBlock(editorContent);
     editorContent = cleanEmptyHtmlTags(editorContent);
     editorContent = wrapContentInFullTableStructure(editorContent);
+
     editorContent = addOneBr(editorContent);
     editorContent = replaceTripleBrWithSingle(editorContent);
 
