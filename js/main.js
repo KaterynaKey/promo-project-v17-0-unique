@@ -60,7 +60,7 @@ function italicLinks(htmlContent) {
     htmlContent = htmlContent.replace(/<a[^>]*>/gi, '').replace(/<\/a>/gi, '');
     blueColors.forEach((color, index) => {
         const regex = new RegExp(`<span[^>]*style="[^"]*color:\\s*${color}[^"]*;[^"]*font-style:\\s*italic[^"]*"[^>]*>(.*?)<\\/span>`, 'gi');
-        htmlContent = htmlContent.replace(regex, '<a href="insertlink" style="font-family:\'Roboto\', Arial, Helvetica, sans-serif;text-decoration: underline;font-weight: 700;color: #0000EE;"><em>$1</em></a>');
+        htmlContent = htmlContent.replace(regex, '<a href="urlhere" style="font-family:\'Roboto\', Arial, Helvetica, sans-serif;text-decoration: underline;font-weight: 700;color: #0000EE;"><em>$1</em></a>');
     });
 
     return htmlContent;
@@ -69,7 +69,7 @@ function italicLinks(htmlContent) {
 function linksStyles(htmlContent) {
     blueColors.forEach((color, index) => {
         const reg = new RegExp(`<span[^>]*style="[^"]*color:\\s*(${color})[^"]*"[^>]*>(.*?)<\\/span>`, 'gi');
-        htmlContent = htmlContent.replace(reg, '<a href="insertlink" style="font-family:\'Roboto\', Arial, Helvetica, sans-serif;text-decoration: underline;font-weight: 700;color: #0000EE;">$2</a>');
+        htmlContent = htmlContent.replace(reg, '<a href="urlhere" style="font-family:\'Roboto\', Arial, Helvetica, sans-serif;text-decoration: underline;font-weight: 700;color: #0000EE;">$2</a>');
     });
 
     return htmlContent;
@@ -287,7 +287,7 @@ function wrapButtonHtml(htmlContent) {
                     <table cellpadding="0" cellspacing="0" role="presentation">
                         <tr>
                             <td class="creative-button" height="51" align="center" style="border-radius: 10px;font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:18px;font-style:normal;line-height:1.5;text-align:center;font-weight: bold; color: #FFFFFF; padding: 3px 5px; background-color: #28b628;" bgcolor="#28b628">
-                               <a href="insertlink" target="_blank" style="font-weight: bold;text-decoration:none;color:#ffffff;padding: 9px 15px;display: block;font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:18px;font-style:normal;line-height:1.5;text-align:center;background-color: #28b628;border-radius: 10px;">
+                               <a href="urlhere" target="_blank" style="font-weight: bold;text-decoration:none;color:#ffffff;padding: 9px 15px;display: block;font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:18px;font-style:normal;line-height:1.5;text-align:center;background-color: #28b628;border-radius: 10px;">
                                     ${content}
                                </a>
                             </td>
@@ -312,7 +312,7 @@ function wrapRightSideImg(htmlContent) {
             </tr>
               <tr>
                 <td align="left" style="font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:18px;font-style:normal;font-weight:normal;line-height:1.5;text-align:left;color:#000000;padding-bottom: 15px; padding-top: 15px;">
-                  <a align="right" href="insertlink" target="_blank" style="display: inline-block; float: right; width: 50%; max-width: 50%; margin-left: 18px; margin-bottom: 12px;">
+                  <a align="right" href="urlhere" target="_blank" style="display: inline-block; float: right; width: 50%; max-width: 50%; margin-left: 18px; margin-bottom: 12px;">
                     <img alt="Preview" height="224"
                          align="right"
                          src="https://ogfinstorage.com/"
@@ -343,7 +343,7 @@ function wrapLeftSideImg(htmlContent) {
             </tr>
               <tr>
                 <td align="left" style="font-family:'Roboto', Arial, Helvetica, sans-serif;font-size:18px;font-style:normal;font-weight:normal;line-height:1.5;text-align:left;color:#000000;padding-bottom: 14px; padding-top: 14px;">
-                  <a align="left" href="insertlink" target="_blank" style="display: inline-block; float: left; width: 50%; max-width: 50%; margin-right: 18px; margin-bottom: 12px;">
+                  <a align="left" href="urlhere" target="_blank" style="display: inline-block; float: left; width: 50%; max-width: 50%; margin-right: 18px; margin-bottom: 12px;">
                     <img alt="Preview" height="224"
                          align="left"
                          src="https://ogfinstorage.com/"
@@ -497,7 +497,7 @@ function wrapTextInSpan(htmlContent) {
                    </tr>
                    <tr>
                        <td class="image-block" align="center" style="padding-top: 15px; padding-bottom: 15px;">
-                           <a href="insertlink" target="_blank">
+                           <a href="urlhere" target="_blank">
                                <img alt="Video preview" height="auto"
                                     src="${dynamicSrc}"
                                     style="border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;max-width: 560px;font-size:13px;"
